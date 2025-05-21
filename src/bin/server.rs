@@ -18,11 +18,9 @@ async fn handle_connection(
             maybe_msg = ws_stream.next() => {
                 match maybe_msg {
                     Some(Ok(msg)) => {
-                        if msg.is_text() {
-                            let text = msg.as_text().unwrap().to_string();
-                            println!("From client {addr} \"{text}\"");
-                            let tagged = format!("{addr}: {text}");
-                            let _ = bcast_tx.send(tagged);
+                        if let Some(txt) = msg.as_text() {
+                            println!("From client {addr} \"{txt}\"");
+                            let _ = bcast_tx.send(format!("Ratih's Computer - From server: [{addr}]: {txt}"));
                         }
                     }
                     Some(Err(e)) => {
@@ -58,7 +56,7 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
 
     loop {
         let (socket, addr) = listener.accept().await?;
-        println!("New connection from {addr:?}");
+        println!("New connection from Ratih's computer: {addr:?}");
 
         let bcast_tx = bcast_tx.clone();
 

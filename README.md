@@ -19,3 +19,14 @@ Everything continued to work as expected.
 The server printed “Server listening on ws://127.0.0.1:8080” and successfully accepted incoming client connections.
 No other configuration was needed aside from updating the hardcoded URI and bind address in the code. 
 This shows that the WebSocket protocol (ws://) and the broadcast mechanism are not affected by the specific port number used, as long as both the server and clients agree on which port to communicate through.
+
+### 2.3 Small changes. Add some information to client
+![](images/broadcast3.png)
+I updated the server’s message format to make it more informative and readable.
+The server now sends messages in the format `Ratih's Computer - From server [IP:PORT]: message`.
+This makes it clear that the message is coming through the server and identifies which client originally sent it.
+I also updated the log for new connections in the main() function of the server to show
+`New connection from Ratih's computer: {addr}`.
+On the client side, I added a simple welcome message that shows when a client connects
+`Ratih's Computer – Welcome to chat! Type a message`.
+These small changes make the chat output easier to follow, especially when multiple clients are active, and help distinguish between system output and user messages.

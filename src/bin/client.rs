@@ -14,6 +14,8 @@ async fn main() -> Result<(), tokio_websockets::Error> {
     let stdin = tokio::io::stdin();
     let mut stdin = BufReader::new(stdin).lines();
 
+    println!("Ratih's Computer - Welcome to chat! Type a message");
+
     loop {
         tokio::select! {
             // 1. Read from terminal and send to server
